@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result, #reverseResult {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .info-section {
+            margin-top: 30px;
+            text-align: left;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .info-section h2 {
+            font-size: 24px;
+            color: #007BFF;
+        }
+        .info-section p, .info-section li {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Palindrome Checker</h1>
+
+    <label for="inputText">Enter text:</label>
+    <input type="text" id="inputText" />
+    <button id="checkBtn">Check</button>
+    <button id="generateExampleBtn">Generate Example</button>
+
+    <p id="result"></p>
+    <p id="reverseResult"></p>
+
+    <div class="info-section">
+        <h2>How to use Palindrome Checker?</h2>
+        <p>Follow the steps given below on how to find whether a given number or word is a palindrome or not.</p>
+        <ul>
+            <li><b>Step 1:</b> Mention the word or number for which you need to check if the given input holds the Palindrome condition.</li>
+            <li><b>Step 2:</b> Click on "Check" button to get the result.</li>
+            <li><b>Step 3:</b> The reverse string will show the reverse of the given word or number.</li>
+            <li><b>Step 4:</b> If the given input is a palindrome, then the output will be "True"; otherwise, it will be "False".</li>
+        </ul>
+
+        <h2>What is Palindrome?</h2>
+        <p>A palindrome is generally referred to a word, number, sequence, or phrase which is the same when read backwards and forwards. While determining a palindrome for a word, phrase, or sequence, punctuation and spaces are not allowed between them.</p>
+
+        <p>Examples of Palindromes are: <b>Radar, Madam, Eye, 121, 2002, 676, etc.</b></p>
+    </div>
+
+    <script>
+        document.getElementById("checkBtn").addEventListener("click", function() {
+            const inputText = document.getElementById("inputText").value;
+            const resultElement = document.getElementById("result");
+            const reverseElement = document.getElementById("reverseResult");
+
+            // Function to check if the string is a palindrome
+            function isPalindrome(str) {
+                const cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, ''); // Remove non-alphanumeric characters and lowercase it
+                return cleanedStr === cleanedStr.split('').reverse().join('');
+            }
+
+            // Function to reverse the input string
+            function reverseString(str) {
+                return str.split('').reverse().join('');
+            }
+
+            if (inputText) {
+                const palindromeCheck = isPalindrome(inputText);
+                const reversedText = reverseString(inputText);
+
+                // Display whether the string is a palindrome
+                resultElement.textContent = palindromeCheck ? "True" : "False";
+                resultElement.style.color = palindromeCheck ? "green" : "red";
+
+                // Display the reversed string
+                reverseElement.textContent = `Reversed Text: "${reversedText}"`;
+                reverseElement.style.color = "blue";
+            } else {
+                resultElement.textContent = "Please enter some text.";
+                resultElement.style.color = "orange";
+                reverseElement.textContent = "";
+            }
+        });
+
+        // Add functionality for "Generate Example" button
+        document.getElementById("generateExampleBtn").addEventListener("click", function() {
+            document.getElementById("inputText").value = "madam";
+        });
+    </script>
+</body>
+</html>
